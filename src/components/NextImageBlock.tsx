@@ -29,7 +29,21 @@ export default function NextImageBlock({image, aspectRatio, style = {}, ...rest}
 
 	const ref = useRef<HTMLImageElement>(null);
 	const dimensions = useDimensions(ref);
-	const targetDimensions = useDebounce(dimensions, 1000);
+	const debouncedDimensions = useDebounce(dimensions, 1000);
+
+	// For the first render the measured dimensions will be null as the image
+	// element hasn't been mounted yet. This means we won't have a reasonable
+	// size to set in the size attribute, causing next.Image to render a blurry
+	// 64px version of the image.
+	//
+	// To get out of that state as quickly as possible, we don't want to
+	// debounce the change from null dimensions to actual dimensions. We do
+	// that by using the raw measured dimensions until the debounced dimensions
+	// change into _something_.
+	//
+	// If we didn't do this, we would (and did) show a blurry image for a
+	// second while we wait for the debounce timer.
+	const sizes = debouncedDimensions?.width ?? dimensions?.width;
 
 	return (
 		/* eslint-disable jsx-a11y/alt-text */
@@ -39,7 +53,7 @@ export default function NextImageBlock({image, aspectRatio, style = {}, ...rest}
 			src={src}
 			width={width}
 			height={height}
-			sizes={`${targetDimensions.width}px`}
+			sizes={`${sizes ?? 0}px`}
 
 			style={{
 				display: 'block',

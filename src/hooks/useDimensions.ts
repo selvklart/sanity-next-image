@@ -7,11 +7,15 @@ import {RefObject, useLayoutEffect, useState} from 'react';
  * The measurement happens using a client side ResizeObserver and is updated
  * live as the dimensions of the element change.
  */
+
+export interface Dimensions {
+	width: number
+	height: number
+}
+
 export default function useDimensions<T extends HTMLElement>(ref: RefObject<T>) {
-	const [dimensions, setDimensions] = useState({
-		width: 0,
-		height: 0
-	});
+	const [dimensions, setDimensions] = useState<Dimensions | null>(null);
+
 
 	useLayoutEffect(() => {
 		if (ref.current) {

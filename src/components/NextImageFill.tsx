@@ -37,7 +37,7 @@ export default function NextImageFill({image, aspectRatio, style = {}, ...rest}:
 
 	const ref = useRef<HTMLImageElement>(null);
 	const dimensions = useDimensions(ref);
-	const targetDimensions = useDebounce(dimensions, 1000);
+	const debouncedDimensions = useDebounce(dimensions, 1000);
 
 	// NOTE: This code tries to get the browser to move the image within the
 	//       filled rectangle by manipulating the object position.
@@ -71,11 +71,35 @@ export default function NextImageFill({image, aspectRatio, style = {}, ...rest}:
 	}, [image]);
 
 	const imageAspect = width / height;
-	const measuredAspect = targetDimensions.width / targetDimensions.height;
-	let sizes = targetDimensions.width;
 
-	if (imageAspect > measuredAspect) {
-		sizes = imageAspect * targetDimensions.height;
+	// For the first render the measured dimensions will be null as the image
+	// element hasn't been mounted yet. This means we won't have a reasonable
+	// size to set in the size attribute, causing next.Image to render a blurry
+	// 64px version of the image.
+	//
+	// To get out of that state as quickly as possible, we don't want to
+	// debounce the change from null dimensions to actual dimensions. We do
+	// that by using the raw measured dimensions until the debounced dimensions
+	// change into _something_.
+	//
+	// If we didn't do this, we would (and did) show a blurry image for a
+	// second while we wait for the debounce timer.
+	const currentDimensions = debouncedDimensions ?? dimensions;
+	let sizes = 0;
+
+	if (currentDimensions) {
+		sizes = currentDimensions.width;
+
+		// If the image is wider than the frame it is cropped into, adjust the
+		// sizes prop so that it represents the real width of the image,
+		// including the parts hidden outside the frame.
+		//
+		// This ensures we load a variant of the image with enough pixels to
+		// show the visible part in full detail.
+		const measuredAspect = currentDimensions.width / currentDimensions.height;
+		if (imageAspect > measuredAspect) {
+			sizes = imageAspect * currentDimensions.height;
+		}
 	}
 
 	return (
