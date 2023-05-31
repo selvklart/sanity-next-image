@@ -1,6 +1,6 @@
 {
   "name": "@selvklart/sanity-next-image",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "",
   "source": "src/index.ts",
   "main": "dist/main.js",
@@ -16,7 +16,7 @@
     "build": "parcel build",
     "lint": "eslint ."
   },
-  "author": "",
+  "author": "Erik Wien <erik@selvklart.no>",
   "license": "ISC",
   "dependencies": {
     "@sanity/image-url": "^1.0.2"
