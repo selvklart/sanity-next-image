@@ -1,6 +1,5 @@
 import {useMemo} from 'react';
-import {SanityImage, getSanityImage} from '../sanity';
-import {SanityProjectDetails} from 'dist/types';
+import {SanityImage, SanityProjectDetails, getSanityImage} from '../sanity';
 
 /**
  * Hook resolving the URL and width/height of the image passed in.
