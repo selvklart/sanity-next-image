@@ -19,10 +19,12 @@
   "author": "Erik Wien <erik@selvklart.no>",
   "license": "ISC",
   "dependencies": {
-    "@sanity/image-url": "^1.0.2",
-    "next": "^13.2.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@sanity/image-url": "^1.0.2"
+  },
+  "peerDependencies": {
+    "next": "13.x",
+    "react": "18.x",
+    "react-dom": "18.x"
   },
   "devDependencies": {
     "@parcel/packager-ts": "2.8.3",
@@ -38,7 +40,10 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "next": "^13.2.1",
     "parcel": "^2.8.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^4.9.5"
   }
 }
