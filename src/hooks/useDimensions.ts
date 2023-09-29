@@ -1,21 +1,19 @@
 import {RefObject, useLayoutEffect, useState} from 'react';
 
-/**
- * Hook measuring a HTMLElement passed in as a ref returning it's width and
- * height.
- *
- * The measurement happens using a client side ResizeObserver and is updated
- * live as the dimensions of the element change.
- */
-
 export interface Dimensions {
 	width: number
 	height: number
 }
 
+/**
+ * Hook measuring a HTMLElement passed in as a ref, returning its width and
+ * height.
+ *
+ * The measurement happens using a client side ResizeObserver and is updated
+ * live as the dimensions of the element change.
+ */
 export default function useDimensions<T extends HTMLElement>(ref: RefObject<T>) {
 	const [dimensions, setDimensions] = useState<Dimensions | null>(null);
-
 
 	useLayoutEffect(() => {
 		if (ref.current) {

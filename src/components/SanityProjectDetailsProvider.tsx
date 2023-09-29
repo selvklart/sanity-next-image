@@ -1,9 +1,5 @@
 import {createContext, PropsWithChildren, useContext} from 'react';
-
-export interface SanityProjectDetails {
-	projectId: string;
-	dataset: string;
-}
+import {SanityProjectDetails} from 'src/sanity';
 
 const SanityProjectDetailsContext = createContext<SanityProjectDetails | null>(null);
 

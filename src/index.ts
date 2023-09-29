@@ -1,8 +1,7 @@
 
 export {
 	default as SanityProjectDetailsProvider,
-	useSanityProjectDetails,
-	type SanityProjectDetails
+	useSanityProjectDetails
 } from './components/SanityProjectDetailsProvider';
 
 export {
@@ -22,9 +21,11 @@ export {
 } from './hooks/useSanityImage';
 
 export {
+	getSanityImage,
+	type SanityProjectDetails,
 	type SanityImage,
 	type SanityImageCrop,
 	type SanityImageHotspot,
 	type SanityReference
-} from './image';
+} from './sanity';
 

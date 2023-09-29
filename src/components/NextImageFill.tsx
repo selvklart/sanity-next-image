@@ -3,7 +3,7 @@ import {useMemo, useRef} from 'react';
 import useDebounce from '../hooks/useDebounce';
 import useDimensions from '../hooks/useDimensions';
 import useSanityImage from '../hooks/useSanityImage';
-import {SanityImage} from '../image';
+import {SanityImage} from '../sanity';
 import {useSanityProjectDetails} from './SanityProjectDetailsProvider';
 
 export interface NextImageFillProps extends Omit<ImageProps, 'src' | 'fill' | 'objectFit' | 'objectPosition'> {
