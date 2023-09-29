@@ -1,6 +1,6 @@
 {
   "name": "@selvklart/sanity-next-image",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "",
   "source": "src/index.ts",
   "main": "dist/main.js",
